@@ -6,25 +6,32 @@ This document a suggestion for a common FCOO standard format, structure, templat
 # Quick version
 ### First time
 **Install Git**
-	1. Install Git from [git-scm.com](http://git-scm.com/)
-	2. Create account on [github.com](https://github.com) 
-	3. *Optional*: Install [TortoiseGit]( https://tortoisegit.org) - Windows Shell Interface to Git
-	4. *Optional*: Install a [GitHub GUI](http://git-scm.com/downloads/guis) eq. [GitHub for Windows](https://windows.github.com/)
-**Install Node.js, Grunt, Sass etc,**
-	5. Install Node.js  from https://nodejs.org 
-	6. `>npm install -g npm`
-	7. `>npm install -g grunt-cli`
-	8. `>npm install -g grunt-init`
-	9. `>npm install -g bower`
-	10. Install [Ruby](https://www.ruby-lang.org/) from https://www.ruby-lang.org/en/downloads/
-	11. `>gem install sass` (or see http://sass-lang.com/install)
-	12. *Optional*: 
+- Install Git from [git-scm.com](http://git-scm.com/)
+- Create account on [github.com](https://github.com) 
+- *Optional*: Install [TortoiseGit]( https://tortoisegit.org) Windows Shell Interface to Git
+- *Optional*: Install a [GitHub GUI](http://git-scm.com/downloads/guis) eq. [GitHub for Windows](https://windows.github.com/)
 
+**Install Node.js, Grunt, Sass etc,**
+- Install Node.js  from https://nodejs.org 
+- `>npm install -g npm`
+- `>npm install -g grunt-cli`
+- `>npm install -g grunt-init`
+- `>npm install -g bower`
+- Install [Ruby](https://www.ruby-lang.org/) from https://www.ruby-lang.org/en/downloads/
+- `>gem install sass` (or see http://sass-lang.com/install)
+
+### Create new repository (package or application)
+1. Select a appropriate name for the packages
+	- Use lower letter and '-' instead of camel-case (`fcoo-menu`', not '`FCOOMenu`')
+	- If it is a 'stand-alone' package, the name can start with '`leaflet-`' or '`jquery-`'
+	- If the packages is directly part of one or more FCOO applications, the name should start with '`fcoo-`'
+2. Create the new repository in GitHub
+3. Clone the new repository to your computer/Desktop 
 
 
  
 
-
+# Full version
 
 ## Tools and Packages
 
@@ -56,12 +63,12 @@ To (semi) automatic create new repositories and/or applications you need to inst
     >npm install -g bower
 
 #### Install Sass
-To install Sass we need [Ruby](https://www.ruby-lang.org/) 
+To install Sass you need [Ruby](https://www.ruby-lang.org/) 
 
 - Install Ruby from https://www.ruby-lang.org/en/downloads/
 - `>gem install sass` 
 
-See https://sass-lang.com/install 
+See also https://sass-lang.com/install 
 
 
 ## THE REST
@@ -93,12 +100,7 @@ The default `README.md` file contains the following sections, but new ones can b
 
 
 ## Create a new repository
-1. Select a appropriate name for the packages
-	- Use lower letter and '-' instead of camel-case (`fcoo-menu`', not '`FCOOMenu`')
-	- If it is a 'stand-alone' package, the name can start with '`leaflet-`' or '`jquery-`'
-	- If the packages is directly part of a FCOO application, the name must start with '`fcoo-`'
-2. Create the new repository in GitHub
-3. Clone the repository to Desktop
+
 4. Copy all files and directories from `PACKAGENAME_TEMPLATE` 
 5. Replace all appearance of the text `PACKAGENAME` in all files with the real name of the packages
 6. Run `>bower init` to init bower and update/create `bower.json`
