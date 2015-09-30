@@ -1,4 +1,4 @@
-# FCOO Application
+# FCOO Web Development
 
 This document a suggestion for a common FCOO standard format, structure, templates, npm scripts, and Grunt scripts to create, develop and distribute packages, plugins, and applications from FCOO
 
@@ -6,19 +6,19 @@ This document a suggestion for a common FCOO standard format, structure, templat
 # Quick version
 ### First time
 **Install Git**
-1. Install Git from [git-scm.com](http://git-scm.com/)
-2. Create account on [github.com](https://github.com) 
-3. *Optional*: Install [TortoiseGit]( https://tortoisegit.org) - Windows Shell Interface to Git
-4. *Optional*: Install a [GitHub GUI](http://git-scm.com/downloads/guis) eq. [GitHub for Windows](https://windows.github.com/)
+	1. Install Git from [git-scm.com](http://git-scm.com/)
+	2. Create account on [github.com](https://github.com) 
+	3. *Optional*: Install [TortoiseGit]( https://tortoisegit.org) - Windows Shell Interface to Git
+	4. *Optional*: Install a [GitHub GUI](http://git-scm.com/downloads/guis) eq. [GitHub for Windows](https://windows.github.com/)
 **Install Node.js, Grunt, Sass etc,**
-5. Install Node.js  from https://nodejs.org 
-6. `>npm install -g npm`
-7. `>npm install -g grunt-cli`
-8. `>npm install -g grunt-init`
-9. `>npm install -g bower`
-10. Install [Ruby](https://www.ruby-lang.org/) from https://www.ruby-lang.org/en/downloads/
-11. `>gem install sass` (or see http://sass-lang.com/install)
-12. *Optional*: 
+	5. Install Node.js  from https://nodejs.org 
+	6. `>npm install -g npm`
+	7. `>npm install -g grunt-cli`
+	8. `>npm install -g grunt-init`
+	9. `>npm install -g bower`
+	10. Install [Ruby](https://www.ruby-lang.org/) from https://www.ruby-lang.org/en/downloads/
+	11. `>gem install sass` (or see http://sass-lang.com/install)
+	12. *Optional*: 
 
 
 
