@@ -6,6 +6,7 @@
 [grunt]: https://gruntjs.com
 [bower]: https://bower.io
 [sass]: https://sass-lang.com
+[jshint]: http://jshint.com/
 [gruntfile]: (#gruntfile)
 
 This document a suggestion for a common FCOO standard format, structure, templates, npm scripts, and Grunt scripts to create, develop and distribute packages, plugins, and applications from FCOO
@@ -15,13 +16,14 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - Using [Git][], [GitHub][], and account [github/fcoo](http://github.com/fcoo)
 - Using [Grunt.js][grunt] as Task Runner
 - Using [Bower][bower] as front-end package management
-- Using [Sass][sass] to create and compile css-files. The following sass-packages are installed automatic:
-	- [bourbon](http://bourbon.io)
-	- [modernizr-mixin](https://github.com/danielguillan/modernizr-mixin)
-	- [mathsass](https://github.com/terkel/mathsass)
+- Using [Sass][] to create and compile css-files. The following sass-packages are installed automatic: [bourbon](http://bourbon.io), [modernizr-mixin](https://github.com/danielguillan/modernizr-mixin), [mathsass](https://github.com/terkel/mathsass)
+- Using [JSHint][] to validate and check JavaScript code
 - Using	[grunt-init][grunt-init] and the [FCOO templates](#fcoo_template) to create new packages/application
 - Using common [directory structure](#directory_structure) and [file formats](#file_formats): `\src, \demo, \dist, \bower_components `
-- Using [grunt-tasks][gruntfile] defined in [github.com/FCOO/gruntfile.js](https://github.com/fcoo/gruntfile.js) to validate, check and build the package/application
+- Using [grunt-tasks][gruntfile] defined in [github.com/FCOO/gruntfile.js](https://github.com/fcoo/gruntfile.js) to validate, check and build the package/application:
+	- `>grunt check` - Checking syntax of all .js and .scss files in `\src`
+	- `>grunt dev  ` - Building a development version in `\demo` or `\dev`
+	- **`>grunt prod` - Building a production version in `\dist`**
 - Using git `tags` when [pushing new versions](#push_new_version) to [GitHub][]
 
 ----  
@@ -35,16 +37,17 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - *Optional*: Install [TortoiseGit]( https://tortoisegit.org) Windows Shell Interface to Git
 - *Optional*: Install a [GitHub GUI](http://git-scm.com/downloads/guis) eq. [GitHub for Windows](https://windows.github.com/)
 
-**Node.js, Grunt, Sass etc.**
+**Node.js, Grunt, Sass, JSHint etc.**
 
-1. - Install Node.js from [https://nodejs.org]()
-1. - `>npm install -g npm`
-1. - `>npm install -g grunt-cli`
-1. - `>npm install -g grunt-init`
-1. - `>npm install -g bower`
-1. - Install [Ruby](https://www.ruby-lang.org/) from [https://www.ruby-lang.org/en/downloads/]()
-1. - `>gem install sass` (or see http://sass-lang.com/install)
-2.  *Optional*: Create a json-file with [default prompt answers](#default_prompt) for new applications/packages
+- Install Node.js from [https://nodejs.org]()
+- `>npm install -g npm`
+- `>npm install -g grunt-cli`
+- `>npm install -g grunt-init`
+- `>npm install -g bower`
+- Install [Ruby](https://www.ruby-lang.org/) from [https://www.ruby-lang.org/en/downloads/]()
+- `>gem install sass` (or see http://sass-lang.com/install)
+- *Optional*: `>npm install -g jshint`
+- *Optional*: Create a json-file with [default prompt answers](#default_prompt) for new applications/packages
 
 **FCOO templates for [grunt-init][grunt-init]** 
 
@@ -82,7 +85,7 @@ We use [Node.js](https://nodejs.org) as the JavaScript engine and [npm (Node Pac
 - Install **Node.js** from (https://nodejs.org)
 - **npm** is installed together with Node.js, but you update to the latest version with `>npm install -g npm``
 
-### Bower, Grunt, and Sass
+### Bower, Grunt, Sass, and JSHint
 
 - As Task Runner we use **[Grunt](http://gruntjs.com/)**
 - As a front-end package management we use **[Bower](https:/bower.io)**
@@ -123,6 +126,15 @@ To install Sass you need [Ruby](https://www.ruby-lang.org/)
 - `>gem install sass` 
 
 See also https://sass-lang.com/install 
+
+#### JSHint
+[JSHint][] is used inside [grunt-tasks][gruntfile] to validate and check JavaScript code.
+If you install it as stand-alone with `npm install -g jshint` you can check individual js-files from the repository root with 
+`>jshint src\FILENAME.js`
+
+There are a lot of [options for JSHint](http://jshint.com/docs/options/) and the file `.jshintrc` contains the options used in [grunt-tasks][gruntfile] and when `jshint` is called from the root
+
+
 
 <a name="fcoo_template"></a>
 ## FCOO Templates
@@ -180,9 +192,9 @@ The `Gruntfile` contains all the different Grunt-task used to check and build th
 `gruntfile.js` and `package.json` are in [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js) and are automatic included in the  [FCOO templates](#fcoo_template)
 The main task are:
 
-- `>grunt check` Checking syntax of all .js and .scss files in `\src`
-- `>grunt dev  ` Building a development version in `\demo` or `\dev`
-- **`>grunt prod`  Building a production version in `\dist`**
+- `>grunt check` - Checking syntax of all .js and .scss files in `\src`
+- `>grunt dev  ` - Building a development version in `\demo` or `\dev`
+- **`>grunt prod` - Building a production version in `\dist`**
    
 <a name="gruntfile_setup_json"></a>
 ### Gruntfile_setup.json
