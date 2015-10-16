@@ -64,12 +64,20 @@ This document a suggestion for a common FCOO standard format, structure, templat
 
 
 ## Build and push a new version to GitHub 
+### Package
 	>grunt prod //Build a new version
 	>git commit --?? TODO: Hvilken param skal bruges? //Git Commit => 'master'
 	>git checkout gh-pages //Update gh-page branch
 	>git merge master
 	>git checkout master
 	>bower version [<newversion> | major | minor | patch] //Create a new version with bower 
+	>git push --all //Push all branches to GitHub
+	>git push --tags //Push all tags to GitHub
+### TODO: Application
+	>grunt check //Check syntax
+	>git commit --?? TODO: Hvilken param skal bruges? //Git Commit => 'master'
+	>bower version [<newversion> | major | minor | patch] //Create a new version with bower 
+	>grunt prod //Build the production version in \dist
 	>git push --all //Push all branches to GitHub
 	>git push --tags //Push all tags to GitHub
 	
@@ -273,7 +281,7 @@ If you need SASS packages or other packages under development run `>bower instal
 
 <a name="push_new_version"></a>
 # Build and push a new version to GitHub 
-
+## Package
 #### Build a new version 
 	>grunt prod
 
@@ -294,7 +302,10 @@ If you need SASS packages or other packages under development run `>bower instal
 	>git push --tags
 	
 
-#### TortoiseGit (Windows/pathfinder) 
+## Application
+-- TODO -- Same as in Quick version 
+
+## TortoiseGit (Windows/pathfinder) 
 select `TortoiseGit->Push` 
 
 ![](http://i.imgur.com/7ZmEBIO.png)
