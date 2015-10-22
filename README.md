@@ -8,9 +8,19 @@
 [sass]: https://sass-lang.com
 [jshint]: http://jshint.com/
 [gruntfile]: (#gruntfile)
+[semver]: http://semver.org/
+[fcoo-gruntfile]: https://github.com/fcoo/gruntfile.js
+
 
 This document a suggestion for a common FCOO standard format, structure, templates, npm scripts, and Grunt scripts to create, develop and distribute packages, plugins, and applications from FCOO
 
+# Contents
+1.	[Overview](#overview)
+2.	[Quick version](#quick_version)
+3.	[Full version](#full_version)
+
+----
+<a name="overview"></a>
 # Overview
 
 - Using [Git][], [GitHub][], and account [github/fcoo](http://github.com/fcoo)
@@ -20,13 +30,12 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - Using [JSHint][] to validate and check JavaScript code
 - Using	[grunt-init][grunt-init] and the [FCOO templates](#fcoo_template) to create new packages/application
 - Using common [directory structure](#directory_structure) and [file formats](#file_formats): `\src, \demo, \dist, \bower_components `
-- Using [grunt-tasks][gruntfile] defined in [github.com/FCOO/gruntfile.js](https://github.com/fcoo/gruntfile.js) to validate, check and build the package/application:
-	- `>grunt check` - Checking syntax of all .js and .scss files in `\src`
-	- `>grunt dev  ` - Building a development version in `\demo` or `\dev`
-	- **`>grunt prod` - Building a production version in `\dist`**
+- Using [grunt-tasks][gruntfile] defined in [github.com/FCOO/gruntfile.js][fcoo-gruntfile] to [validate, check and build the package/application](#push_new_version)
+- Using [Semantic Versioning][semver]: `1.2.3` / `major.minor.patch`
 - Using git `tags` when [pushing new versions](#push_new_version) to [GitHub][]
 
 ----  
+<a name="quick_version"></a>
 # Quick version
 
 ## Installation
@@ -57,31 +66,29 @@ This document a suggestion for a common FCOO standard format, structure, templat
 
 
 ## Create new repository (package or application)
-1. Select a appropriate name for the package / application. No CamelCase: `fcoo-menu`', not '`FCOOMenu`'.
+1. Select an appropriate name for the package / application. No CamelCase: `fcoo-menu`', not '`FCOOMenu`'.
 2. Create the new repository in [GitHub]
 3. Clone the new repository to your computer/Desktop
 4. Create the repository using [grunt-init] and one of the [FCOO templates](#fcoo_template)
 
 
-## Build and push a new version to GitHub 
-### Package
-	>grunt prod //Build a new version
-	>git commit --?? TODO: Hvilken param skal bruges? //Git Commit => 'master'
-	>git checkout gh-pages //Update gh-page branch
-	>git merge master
-	>git checkout master
-	>bower version [<newversion> | major | minor | patch] //Create a new version with bower 
-	>git push --all //Push all branches to GitHub
-	>git push --tags //Push all tags to GitHub
-### TODO: Application
-	>grunt check //Check syntax
-	>git commit --?? TODO: Hvilken param skal bruges? //Git Commit => 'master'
-	>bower version [<newversion> | major | minor | patch] //Create a new version with bower 
-	>grunt prod //Build the production version in \dist
-	>git push --all //Push all branches to GitHub
-	>git push --tags //Push all tags to GitHub
-	
----
+## Check, build, and push a new version to GitHub 
+The `Gruntfile.js` installed with the [FCOO Templates](#fcoo_template) ([github.com/FCOO/gruntfile.js][fcoo-gruntfile]) has the following main tasks
+
+### `>grunt check`
+Check the syntax of all `.scss` and `.js` files in `\src`
+
+### `>grunt dev`
+Building a development version in `\demo` or `\dev`
+
+### `>grunt prod`
+Building a production version in `\dist` 
+
+### `>grunt github`
+Create a complete new release and push it to [GitHub][]
+
+----  
+<a name="full_version"></a>
 # Full version
 
 ## Tools and Packages
@@ -134,7 +141,7 @@ To install Sass you need [Ruby](https://www.ruby-lang.org/)
 - `>gem install sass` 
 
 See also https://sass-lang.com/install 
-
+<a name="jshint"></a>
 #### JSHint
 [JSHint][] is used inside [grunt-tasks][gruntfile] to validate and check JavaScript code.
 If you install it as stand-alone with `npm install -g jshint` you can check individual js-files from the repository root with 
@@ -147,6 +154,8 @@ There are a lot of [options for JSHint](http://jshint.com/docs/options/) and the
 <a name="fcoo_template"></a>
 ## FCOO Templates
 Using [grunt-init] to install one of the FCOO Templates ([`fcoo-application`](https://github.com/FCOO/grunt-init-fcoo-application), [`fcoo-leaflet`](https://github.com/FCOO/grunt-init-fcoo-leaflet), or [`fcoo-jquery`](https://github.com/FCOO/grunt-init-fcoo-jquery))
+
+**These templates will also install `Gruntfile.js` and `package.json` from [github.com/FCOO/gruntfile.js][fcoo-gruntfile]** 
 
 <a name="directory_structure"></a>
 ## Directory structure
@@ -265,7 +274,7 @@ You could explicitly define main files for that components.
 
 
 ## Create new repository (package or application)
-1. Select a appropriate name for the package / application
+1. Select an appropriate name for the package / application
 	- Use lower letter and '-' instead of camel-case (`fcoo-menu`', not '`FCOOMenu`')
 	- If it is a 'stand-alone' package, the name can start with '`leaflet-`' or '`jquery-`'
 	- If the packages is directly part of one or more FCOO applications, the name should start with '`fcoo-`'
@@ -276,38 +285,81 @@ You could explicitly define main files for that components.
 	- `>grunt-init fcoo-leaflet`
 	- `>grunt-init fcoo-jquery`
 
-If you need SASS packages or other packages under development run `>bower install --save-dev THE_NAME_OF_THE_PACKAGE` (*Note: Remember to add `--save-dev`*)
+If you need SASS packages or other packages under development run `>bower install --save-dev THE_NAME_OF_THE_PACKAGE` (*Note: Remember to add `--save-dev`*)f
 
 
 <a name="push_new_version"></a>
-# Build and push a new version to GitHub 
-## Package
-#### Build a new version 
-	>grunt prod
+## Check, build, and push a new version to GitHub 
+The `Gruntfile.js` installed with the [FCOO Templates](#fcoo_template) ([github.com/FCOO/gruntfile.js][fcoo-gruntfile]) has the following main tasks
 
-#### Git Commit => 'master':
-	>git commit --?? TODO: Hvilken param skal bruges?
-
-#### Update gh-page branch
- 	first time: >git branch gh-pages 
-	>git checkout gh-pages
-	>git merge master
-	>git checkout master
-   
-#### Create a new version with [bower version](http://bower.io/docs/api/#version)
-	>bower version [<newversion> | major | minor | patch]
-
-#### Push all branches and all tags to GitHub
-	>git push --all
-	>git push --tags
-	
-
-## Application
--- TODO -- Same as in Quick version 
-
-## TortoiseGit (Windows/pathfinder) 
-select `TortoiseGit->Push` 
-
-![](http://i.imgur.com/7ZmEBIO.png)
+### `>grunt check`
+- Check the syntax of all `.js` files in `\src` using [JSHint](#jshint)
+- Check the syntax of all `.scss` in `\src`
 
 
+### `>grunt dev`
+TODO: Mangler 
+(Building a development version in `\demo` or `\dev`)
+- Check syntax of `.js` and `.scss` files in `\src`
+- Update all bower components
+- Concat all `.js` and `.css` files in bower components into `\demo\bower_components.js` and `\demo\bower_components.css`
+- Copy all images and font files used by bower components to `\demo\images` and `\demo\fonts`   
+
+
+### `>grunt prod`
+Building a production version in `\dist`
+In [Gruntfile_setup.json](#gruntfile_setup_json) the `isApplication` entity determine if it is an *`Application`* or a *`Package`*
+#### Application
+- Check syntax of `.js` and `.scss` files in `\src`
+- Update all bower components   
+- Concat and minify all `.js` files in bower components **AND** in `\src` into one file `\dist\[[APPLICATIONNAME]_[TIMESTAMP].js` and `\dist\[[APPLICATIONNAME]_[TIMESTAMP].min.js`      
+- Compile all `.scss` files in `\src` and concat and minify them with all the `.css` files in bower components **AND** in `\src` into one file `\dist\[[APPLICATIONNAME]_[TIMESTAMP].css` and `\dist\[[APPLICATIONNAME]_[TIMESTAMP].min.css`
+- Create `\dist\index.html` from `\src\index_TEMPLATE.html`, `\src\meta.html`, and `\src\body.html` 
+- Copy all images and font files used by bower components to `\dist\images` and `\dist\fonts`   
+- Copy all images and font files in `\src` to `\dist\images` and `\dist\fonts`
+
+##### output example (application='*fcoo-app*')
+	dist/
+	  images/
+	  fonts/
+	  index.html
+	  fcoo-app_2015-12-24-13_22_50.js
+	  fcoo-app_2015-12-24-13_22_50.min.js
+	  fcoo-app_2015-12-24-13_22_50.css
+	  fcoo-app_2015-12-24-13_22_50.min.css
+
+
+ 
+#### Package
+- Check syntax of `.js` and `.scss` files in `\src`
+- Concat and minify all `.js`files in `\src` into one file `\dist\[PACKAGENAME].js` and `\dist\[PACKAGENAME].min.js`
+- Compile, concat and minify all `.scss` files in `\src` into one file `\dist\PACKAGENAME.css` and `\dist\PACKAGENAME.min.css`
+- Copy all images and font files in `\src` to `\dist\images` and `\dist\fonts`
+
+##### Output example (packages='*fcoo-plugin*')
+	dist/
+	  images/
+	  fonts/
+	  fcoo-plugin.js
+	  fcoo-plugin.min.js
+	  fcoo-plugin.css
+	  fcoo-plugin.min.css
+
+### `>grunt github`
+Create a complete new release and push it to [GitHub][]
+- Run `grunt prod` *(optional)*
+- Prompt for new and update `version` in `bower.json` and `package.json`
+- Update `\dist\index.html` with new version (only *Application*)
+- Commit all files in [Git][]
+- Create a new `TAG` with message "*v1.2.3*"
+- Merge branch `'master'` into branch `'gh-pages'` *(optional)*
+- Push all branches and tags to [GitHub][]
+
+### Credential Helper
+ On `Windows` you can use a [credential helper](http://windows.microsoft.com/en-us/windows7/manage-stored-passwords-certificates-and-other-credentials) to tell [Git][] to remember your GitHub username and password every time it talks to GitHub. Just run
+
+    git config --global credential.helper wincred
+
+To stop it run
+
+	git config --global --unset credential.helper 
