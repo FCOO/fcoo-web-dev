@@ -211,7 +211,8 @@ The main task are:
 
 - `>grunt check` - Checking syntax of all .js and .scss files in `\src`
 - `>grunt dev  ` - Building a development version in `\demo` or `\dev`
-- **`>grunt prod` - Building a production version in `\dist`**
+- `>grunt prod` - Building a production version in `\dist`
+- `>grunt github` - Create a complete new release and push it to GitHub
    
 <a name="gruntfile_setup_json"></a>
 ### Gruntfile_setup.json
