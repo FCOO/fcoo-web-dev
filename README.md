@@ -286,7 +286,7 @@ You could explicitly define main files for that components.
 	- `>grunt-init fcoo-leaflet`
 	- `>grunt-init fcoo-jquery`
 
-If you need SASS packages or other packages under development run `>bower install --save-dev THE_NAME_OF_THE_PACKAGE` (*Note: Remember to add `--save-dev`*)f
+If you need SASS packages or other packages under development run `>bower install --save-dev THE_NAME_OF_THE_PACKAGE` (*Note: Remember to add `--save-dev`*)
 
 
 <a name="push_new_version"></a>
