@@ -49,13 +49,13 @@ This document a suggestion for a common FCOO standard format, structure, templat
 **Node.js, Grunt, Sass, JSHint etc.**
 
 - Install Node.js from [https://nodejs.org]()
-- `>npm install -g npm`
-- `>npm install -g grunt-cli`
-- `>npm install -g grunt-init`
-- `>npm install -g bower`
+- `npm install -g npm`
+- `npm install -g grunt-cli`
+- `npm install -g grunt-init`
+- `npm install -g bower`
 - Install [Ruby](https://www.ruby-lang.org/) from [https://www.ruby-lang.org/en/downloads/]()
-- `>gem install sass` (or see http://sass-lang.com/install)
-- *Optional*: `>npm install -g jshint`
+- `gem install sass` (or see http://sass-lang.com/install)
+- *Optional*: `npm install -g jshint`
 - *Optional*: Create a json-file with [default prompt answers](#default_prompt) for new applications/packages
 
 **FCOO templates for [grunt-init][grunt-init]** 
@@ -75,16 +75,16 @@ This document a suggestion for a common FCOO standard format, structure, templat
 ## Check, build, and push a new version to GitHub 
 The `Gruntfile.js` installed with the [FCOO Templates](#fcoo_template) ([github.com/FCOO/gruntfile.js][fcoo-gruntfile]) has the following main tasks
 
-### `>grunt check`
+### `grunt check`
 Check the syntax of all `.scss` and `.js` files in `\src`
 
-### `>grunt dev`
+### `grunt dev`
 Building a development version in `\demo` or `\dev`
 
-### `>grunt prod`
+### `grunt prod`
 Building a production version in `\dist` 
 
-### `>grunt github`
+### `grunt github`
 Create a complete new release and push it to [GitHub][]
 
 ----  
@@ -98,7 +98,7 @@ We use [Node.js](https://nodejs.org) as the JavaScript engine and [npm (Node Pac
 
 #### Installation
 - Install **Node.js** from (https://nodejs.org)
-- **npm** is installed together with Node.js, but you update to the latest version with `>npm install -g npm``
+- **npm** is installed together with Node.js, but you update to the latest version with `npm install -g npm``
 
 ### Bower, Grunt, Sass, and JSHint
 
@@ -110,11 +110,11 @@ We use [Node.js](https://nodejs.org) as the JavaScript engine and [npm (Node Pac
 
 To load and run the version of Grunt you have installed locally to your project, you must install the **Grunt Command Line Interface (grunt-cli)** globally (once). 
 
-    >npm install -g grunt-cli
+    npm install -g grunt-cli
 
 To (semi) automatic create new repositories and/or applications you need to install the Project Scaffolding tool **[grunt-init](http://gruntjs.com/project-scaffolding)** globally (once). 
 
-    >npm install -g grunt-init
+    npm install -g grunt-init
 
 <a name="default_prompt"></a>
 #### Specifying default prompt answers (*Optional*)
@@ -132,20 +132,20 @@ Example:
 
 #### Install Bower
 
-    >npm install -g bower
+    npm install -g bower
 
 #### Install Sass
 To install Sass you need [Ruby](https://www.ruby-lang.org/) 
 
 - Install Ruby from https://www.ruby-lang.org/en/downloads/
-- `>gem install sass` 
+- `gem install sass` 
 
 See also https://sass-lang.com/install 
 <a name="jshint"></a>
 #### JSHint
 [JSHint][] is used inside [grunt-tasks][gruntfile] to validate and check JavaScript code.
 If you install it as stand-alone with `npm install -g jshint` you can check individual js-files from the repository root with 
-`>jshint src\FILENAME.js`
+`jshint src\FILENAME.js`
 
 There are a lot of [options for JSHint](http://jshint.com/docs/options/) and the file `.jshintrc` contains the options used in [grunt-tasks][gruntfile] and when `jshint` is called from the root
 
@@ -209,10 +209,10 @@ The `Gruntfile` contains all the different Grunt-task used to check and build th
 `gruntfile.js` and `package.json` are in [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js) and are automatic included in the  [FCOO templates](#fcoo_template)
 The main task are:
 
-- `>grunt check` - Checking syntax of all .js and .scss files in `\src`
-- `>grunt dev  ` - Building a development version in `\demo` or `\dev`
-- `>grunt prod` - Building a production version in `\dist`
-- `>grunt github` - Create a complete new release and push it to GitHub
+- `grunt check` - Checking syntax of all .js and .scss files in `\src`
+- `grunt dev  ` - Building a development version in `\demo` or `\dev`
+- `grunt prod` - Building a production version in `\dist`
+- `grunt github` - Create a complete new release and push it to GitHub
    
 <a name="gruntfile_setup_json"></a>
 ### Gruntfile_setup.json
@@ -282,32 +282,48 @@ You could explicitly define main files for that components.
 2. Create the new repository in [GitHub][github]
 3. Clone the new repository to your computer/Desktop
 4. Build the repository by loading the selected FCOO template by running **one** of the commands below and follow the prompts
-	- `>grunt-init fcoo-application`
-	- `>grunt-init fcoo-leaflet`
-	- `>grunt-init fcoo-jquery`
+	- `grunt-init fcoo-application`
+	- `grunt-init fcoo-leaflet`
+	- `grunt-init fcoo-jquery`
 
-If you need SASS packages or other packages under development run `>bower install --save-dev THE_NAME_OF_THE_PACKAGE` (*Note: Remember to add `--save-dev`*)
+If you need SASS packages or other packages under development run `bower install --save-dev THE_NAME_OF_THE_PACKAGE` (*Note: Remember to add `--save-dev`*)
 
 
 <a name="push_new_version"></a>
 ## Check, build, and push a new version to GitHub 
 The `Gruntfile.js` installed with the [FCOO Templates](#fcoo_template) ([github.com/FCOO/gruntfile.js][fcoo-gruntfile]) has the following main tasks
 
-### `>grunt check`
+### `grunt check`
 - Check the syntax of all `.js` files in `\src` using [JSHint](#jshint)
 - Check the syntax of all `.scss` in `\src`
 
 
 ### `>grunt dev`
-TODO: Mangler 
-(Building a development version in `\demo` or `\dev`)
+Building a development version in `\demo` or `\dev`
+In `Gruntfile_setup.json` (see [fcoo-web-dev][]) the `isApplication` entity determine if it is a *`Application`* or *`Package`*
+
+**You only need to run `grunt dev` when you install/uninstall a bower-component or (for application only) changes `src\body.html` or `src\head.html`**
+
+To test your package/application, just browse
+`\demo\index.html` for *Package*
+`\dev\index.html` for *Application*
+
+#### Application
 - Check syntax of `.js` and `.scss` files in `\src`
 - Update all bower components
 - Concat all `.js` and `.css` files in bower components into `\demo\bower_components.js` and `\demo\bower_components.css`
 - Copy all images and font files used by bower components to `\demo\images` and `\demo\fonts`   
+- Create `\dev\index.html` from `\src\index_TEMPLATE-DEV.html`, `\src\meta.html`, and `\src\body.html`
+- Insert<br>`<script src="..src/PATH_AND_FILENAME.js"></script>` and<br>`<link href="..src/PATH_AND_FILENAME.css" rel="stylesheet">`<br>into `dev\index.html`for all js- and css/scss-files in `\src`
+
+#### Package
+- Check syntax of `.js` and `.scss` files in `\src`
+- Update all bower components
+- Concat all `.js` and `.css` files in bower components into `\demo\bower_components.js` and `\demo\bower_components.css`
+- Copy all images and font files used by bower components to `\demo\images` and `\demo\fonts`
 
 
-### `>grunt prod`
+### `grunt prod`
 Building a production version in `\dist`
 In [Gruntfile_setup.json](#gruntfile_setup_json) the `isApplication` entity determine if it is an *`Application`* or a *`Package`*
 #### Application
@@ -346,7 +362,7 @@ In [Gruntfile_setup.json](#gruntfile_setup_json) the `isApplication` entity dete
 	  fcoo-plugin.css
 	  fcoo-plugin.min.css
 
-### `>grunt github`
+### `grunt github`
 Create a complete new release and push it to [GitHub][]
 - Run `grunt prod` *(optional)*
 - Prompt for new and update `version` in `bower.json` and `package.json`
