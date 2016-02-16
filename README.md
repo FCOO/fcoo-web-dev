@@ -175,12 +175,12 @@ The directory of the repository will contain the following subdirectories
 - The references to an image or font file must be relative to the subdirectory: `<img src="images/the_image.gif"/>` or `@font-face {font-family: 'icomoon'; src:url('fonts/icomoon.eot'); .. }`
 - All files in `\dest` is auto-generated. No files should be placed in `\dest` manually
 - **For applications only**:
-	- `src\index_TEMPLATE.html` is the template for buiding the applications in `\dist`
-	- `src\body.html` *must* contain the `<body>` for the application incl `<body style=".."></body>`
-	- `src\head.html` can contains additional `<meta>`-tags
+	- `src\_index_TEMPLATE.html` is the template for buiding the applications in `\dist`
+	- `src\_body.html` *must* contain the contents of the `<body>` for the application
+	- `src\_head.html` can contains additional `<meta>`- and `<links>`-tags
 - [README.md](#readme.md) should be filled out   
 - The file [`\Gruntfile_setup.json`](#gruntfile_setup_json) defines the type of application etc.
-- The file [`\bower_main.json`](#bower_main_json) is used by [`Gruntfile.js`][gruntfile] to retrieve and build the included bower components.
+- The file [`\bower.json`](#bower_json) is used by [`Gruntfile.js`][gruntfile] and [bower] to retrieve and build the included bower components.
 
 
 <a name="file_formats"></a>
@@ -219,14 +219,21 @@ The main task are:
 Used by [`Gruntfile.js`](gruntfile) to define the type of application etc.
 
 	{	
-	  "isApplication"     : false, //true for stand-alone applications. false for packages/plugins
-	  "haveJavaScript"    : true,  //true if the packages have js-files
-	  "haveStyleSheet"    : false, //true if the packages have css and/or scss-files
-	  "exitOnJSHintError" : true,  //if false any error in JSHint will not exit the task
-	  "beforeProdCmd"     : "",    //Cmd to be run at the start of prod-task. Multi cmd can be seperated by "&"
-	  "beforeDevCmd"      : "",    //Cmd to be run at the start of dev-task
-	  "afterProdCmd"      : "",    //Cmd to be run at the end of prod-task
-	  "afterDevCmd"       : "",    //Cmd to be run at the end of dev-task
+	  "isApplication"           : false, //true for stand-alone applications. false for packages/plugins
+	  "haveJavaScript"          : true,  //true if the packages have js-files
+	  "haveStyleSheet"          : false, //true if the packages have css and/or scss-files
+
+	  minimizeBowerComponentsJS	: true,  //Only for application: Minifies the bower components js-file		
+	  minimizeBowerComponentsCSS: true,  //Only for application: Minifies the bower components css-file		
+
+	  "beforeProdCmd"           : "",    //Cmd to be run at the start of prod-task. Multi cmd can be seperated by "&"
+	  "beforeDevCmd"            : "",    //Cmd to be run at the start of dev-task
+	  "afterProdCmd"            : "",    //Cmd to be run at the end of prod-task
+	  "afterDevCmd"				: "",    //Cmd to be run at the end of dev-task
+
+	  "exitOnJSHintError"       : true,  //if false any error in JSHint will not exit the task
+	  "cleanUp"                 : true,  //In debug: set to false
+	  "bowerCheckExistence"     : true,  //true=all bower components must be pressent. false=allows missing files (only in debug)
 	}
 
 ### package.json 
@@ -235,48 +242,37 @@ All metadata and dependencies are put in `bower.json`
 `package.json` is 'partner' with `gruntfile.js` and part of [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js) 
 See also [documentations for packages.json](https://docs.npmjs.com/files/package.json)
 
+<a name="bower_json"></a>
 ### bower.json
-`bower.json` is created when running `grunt-init` 
+`bower.json` is created when running `grunt-init` and updated when packages are added using `bower install --save PACKAGENAME` 
 See also [documentations for bower.json](http://bower.io/docs/creating-packages/#bowerjson-specification)
 
-<a name="bower_main_json"></a>
-### bower_main.json
-Use by [`Gruntfile.js`](gruntfile) to retrieve and build the included bower components. 
+#### overrides
+The `overrides` section of the `bower.json` can be used to changes the dependencies or included files for repositories
 
-#### Contents
-Contains of tree entities
+##### `dependencies`
 
-**`exclude`**
-List of components you want to exclude.
+If a bower component doesn't list its dependencies or you need to remove some of its dependencies
 
-**`dependencies`**
-Unfortunately not all Bower components list their dependencies. 
-If components concatenate in the wrong order, use this option to manually specify dependencies for those components. 
-	
-**`mainFiles`**
-Some Bower components don’t list their main files or (more likely) don’t have `bower.json` file at all. 
-In this case [`bower-concat`](https://www.npmjs.com/package/grunt-bower-concat) will try to guess main file but sometimes it can’t or choose wrong one. 
-You could explicitly define main files for that components.
-	
-**Note**: No comments `//..` or `/*..*/` are allowed in `bower_main.json`
+	{
+	  overrides: {
+		"package_name" {
+	      "dependencies": ["jquery", "another_package_name"]
+	    }
+	  }
+	}
 
-#### Example
-    {
-    	"dependencies": {
-    		"package_name1": "jquery",
-    		"package_name2": ["jquery", "another_package_name"]
-    	},
-    	
-    	"exclude": [
-    		"package_name_to_exclude",
-			"another_package_name_to_exclude"
-    	],
-    	"mainFiles": {
-    		"package_name1": "src/package_name1.min.js",
-    		"package_name2": ["dist/package_name2.js", "dist/package_name2.css"]
-    	}
-    }
+##### `main`
 
+If a bower component doesn't list their main files or (more likely) don’t have `bower.json` file at all OR if you need to select a specific subset of the available files     
+
+	{
+	  overrides: {
+		"package_name" {
+	      "main": ["dist\package_name.min.js", "dist\package_name.min.css"]
+	    }
+	  }
+	}
 
 
 ## Create new repository (package or application)
