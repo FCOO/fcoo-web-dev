@@ -10,7 +10,11 @@
 [gruntfile]: (#gruntfile)
 [semver]: http://semver.org/
 [fcoo-gruntfile]: https://github.com/fcoo/gruntfile.js
-
+[fcoo-gruntfile-check]: https://github.com/fcoo/gruntfile.js#grunt-check
+[fcoo-gruntfile-dev]: https://github.com/fcoo/gruntfile.js#grunt-dev
+[fcoo-gruntfile-prod]: https://github.com/fcoo/gruntfile.js#grunt-prod
+[fcoo-gruntfile-github]: https://github.com/fcoo/gruntfile.js#grunt-github
+[fcoo-gruntfile-setup]: https://github.com/FCOO/gruntfile.js#gruntfile_setupjson
 
 This document a suggestion for a common FCOO standard format, structure, templates, npm scripts, and Grunt scripts to create, develop and distribute packages, plugins, and applications from FCOO
 
@@ -30,9 +34,9 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - Using [JSHint][] to validate and check JavaScript code
 - Using	[grunt-init][grunt-init] and the [FCOO templates](#fcoo_template) to create new packages/application
 - Using common [directory structure](#directory_structure) and [file formats](#file_formats): `\src, \demo, \dist, \bower_components `
-- Using [grunt-tasks][gruntfile] defined in [github.com/FCOO/gruntfile.js][fcoo-gruntfile] to [validate, check and build the package/application](#push_new_version)
+- Using [grunt-tasks][gruntfile] defined in [github.com/FCOO/gruntfile.js][fcoo-gruntfile] to validate, check and build the package/application
 - Using [Semantic Versioning][semver]: `1.2.3` / `major.minor.patch`
-- Using git `tags` when [pushing new versions](#push_new_version) to [GitHub][]
+- Using git `tags` when pushing new versions to [GitHub][]
 
 ----  
 <a name="quick_version"></a>
@@ -72,20 +76,16 @@ This document a suggestion for a common FCOO standard format, structure, templat
 4. Create the repository using [grunt-init] and one of the [FCOO templates](#fcoo_template)
 
 
-## Check, build, and push a new version to GitHub 
-The `Gruntfile.js` installed with the [FCOO Templates](#fcoo_template) ([github.com/FCOO/gruntfile.js][fcoo-gruntfile]) has the following main tasks
+## `gruntfile.js`
+The `gruntfile.js` installed with the [FCOO Templates](#fcoo_template) is used to check, build, and push new versions to GitHub.
+It has its own repository and description in [github.com/FCOO/gruntfile.js][fcoo-gruntfile].
 
-### `grunt check`
-Check the syntax of all `.scss` and `.js` files in `\src`
-
-### `grunt dev`
-Building a development version in `\demo` or `\dev`
-
-### `grunt prod`
-Building a production version in `\dist` 
-
-### `grunt github`
-Create a complete new release and push it to [GitHub][]
+It  is used to has the following main tasks witch details are descriped in [fcoo-gruntfile]
+The main tasks are
+- **[`grunt check`][fcoo-gruntfile-check]** Check the syntax of all `.scss` and `.js` files in `\src`
+- **[`grunt dev`][fcoo-gruntfile-dev]** Building a development version in `\demo` or `\dev`
+- **[`grunt prod`][fcoo-gruntfile-prod]** Building a production version in `\dist` 
+- **[`grunt github`][fcoo-gruntfile-github]** Create a complete new release and push it to [GitHub][]
 
 ----  
 <a name="full_version"></a>
@@ -173,13 +173,14 @@ The directory of the repository will contain the following subdirectories
 - All images must be placed in subdirectories under `\src` or `\src\**` named `images` (eq. `src\images` or `src\my-directory\images`)
 - All fonts files must be placed in subdirectories under `\src`or `\src\**` named `fonts` (eq. `src\fonts` or `src\my-directory\fonts`)
 - The references to an image or font file must be relative to the subdirectory: `<img src="images/the_image.gif"/>` or `@font-face {font-family: 'icomoon'; src:url('fonts/icomoon.eot'); .. }`
+- All files in `\src\_dist_files` will be copyed to `\dist` and `\demo` or `\dev`
 - All files in `\dest` is auto-generated. No files should be placed in `\dest` manually
 - **For applications only**:
 	- `src\_index_TEMPLATE.html` is the template for buiding the applications in `\dist`
 	- `src\_body.html` *must* contain the contents of the `<body>` for the application
 	- `src\_head.html` can contains additional `<meta>`- and `<links>`-tags
 - [README.md](#readme.md) should be filled out   
-- The file [`\Gruntfile_setup.json`](#gruntfile_setup_json) defines the type of application etc.
+- The file [`\Gruntfile_setup.json`][fcoo-gruntfile-setup] defines the type of application etc.
 - The file [`\bower.json`](#bower_json) is used by [`Gruntfile.js`][gruntfile] and [bower] to retrieve and build the included bower components.
 
 
@@ -187,7 +188,7 @@ The directory of the repository will contain the following subdirectories
 ## Files and formats
 
 <a name="readme.md"></a>
-### README.md
+### `README.md`
 The default `README.md` file contains the following sections, but new ones can be added
 
 > Description
@@ -204,46 +205,29 @@ Troubleshooting
 Changelog
 
 <a name="gruntfile"></a>
-### Gruntfile.js
-The `Gruntfile` contains all the different Grunt-task used to check and build the package/application. 
+### `gruntfile.js`
+The `gruntfile.js` contains the code for all the different Grunt-task used to check and build the package/application. 
 `gruntfile.js` and `package.json` are in [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js) and are automatic included in the  [FCOO templates](#fcoo_template)
 The main task are:
+- **[`grunt check`][fcoo-gruntfile-check]** Check the syntax of all `.scss` and `.js` files in `\src`
+- **[`grunt dev`][fcoo-gruntfile-dev]** Building a development version in `\demo` or `\dev`
+- **[`grunt prod`][fcoo-gruntfile-prod]** Building a production version in `\dist` 
+- **[`grunt github`][fcoo-gruntfile-github]** Create a complete new release and push it to [GitHub][]
 
-- `grunt check` - Checking syntax of all .js and .scss files in `\src`
-- `grunt dev  ` - Building a development version in `\demo` or `\dev`
-- `grunt prod` - Building a production version in `\dist`
-- `grunt github` - Create a complete new release and push it to GitHub
-   
 <a name="gruntfile_setup_json"></a>
-### Gruntfile_setup.json
+### `gruntfile_setup.json`
 Used by [`Gruntfile.js`](gruntfile) to define the type of application etc.
+Descriptions are in [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js)
 
-	{	
-	  "isApplication"           : false, //true for stand-alone applications. false for packages/plugins
-	  "haveJavaScript"          : true,  //true if the packages have js-files
-	  "haveStyleSheet"          : false, //true if the packages have css and/or scss-files
 
-	  minimizeBowerComponentsJS	: true,  //Only for application: Minifies the bower components js-file		
-	  minimizeBowerComponentsCSS: true,  //Only for application: Minifies the bower components css-file		
-
-	  "beforeProdCmd"           : "",    //Cmd to be run at the start of prod-task. Multi cmd can be seperated by "&"
-	  "beforeDevCmd"            : "",    //Cmd to be run at the start of dev-task
-	  "afterProdCmd"            : "",    //Cmd to be run at the end of prod-task
-	  "afterDevCmd"				: "",    //Cmd to be run at the end of dev-task
-
-	  "exitOnJSHintError"       : true,  //if false any error in JSHint will not exit the task
-	  "cleanUp"                 : true,  //In debug: set to false
-	  "bowerCheckExistence"     : true,  //true=all bower components must be pressent. false=allows missing files (only in debug)
-	}
-
-### package.json 
+### `package.json` 
 `package.json` are only used to build the packages (compile sass, compress source files etc.) 
 All metadata and dependencies are put in `bower.json`
 `package.json` is 'partner' with `gruntfile.js` and part of [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js) 
 See also [documentations for packages.json](https://docs.npmjs.com/files/package.json)
 
 <a name="bower_json"></a>
-### bower.json
+### `bower.json`
 `bower.json` is created when running `grunt-init` and updated when packages are added using `bower install --save PACKAGENAME` 
 See also [documentations for bower.json](http://bower.io/docs/creating-packages/#bowerjson-specification)
 
@@ -289,95 +273,3 @@ If a bower component doesn't list their main files or (more likely) don’t have
 
 If you need SASS packages or other packages under development run `bower install --save-dev THE_NAME_OF_THE_PACKAGE` (*Note: Remember to add `--save-dev`*)
 
-
-<a name="push_new_version"></a>
-## Check, build, and push a new version to GitHub 
-The `Gruntfile.js` installed with the [FCOO Templates](#fcoo_template) ([github.com/FCOO/gruntfile.js][fcoo-gruntfile]) has the following main tasks
-
-### `grunt check`
-- Check the syntax of all `.js` files in `\src` using [JSHint](#jshint)
-- Check the syntax of all `.scss` in `\src`
-
-
-### `>grunt dev`
-Building a development version in `\demo` or `\dev`
-In `Gruntfile_setup.json` (see [fcoo-web-dev][]) the `isApplication` entity determine if it is a *`Application`* or *`Package`*
-
-**You only need to run `grunt dev` when you install/uninstall a bower-component or (for application only) changes `src\body.html` or `src\head.html`**
-
-To test your package/application, just browse
-`\demo\index.html` for *Package*
-`\dev\index.html` for *Application*
-
-#### Application
-- Check syntax of `.js` and `.scss` files in `\src`
-- Update all bower components
-- Concat all `.js` and `.css` files in bower components into `\demo\bower_components.js` and `\demo\bower_components.css`
-- Copy all images and font files used by bower components to `\demo\images` and `\demo\fonts`   
-- Create `\dev\index.html` from `\src\index_TEMPLATE-DEV.html`, `\src\meta.html`, and `\src\body.html`
-- Insert<br>`<script src="..src/PATH_AND_FILENAME.js"></script>` and<br>`<link href="..src/PATH_AND_FILENAME.css" rel="stylesheet">`<br>into `dev\index.html`for all js- and css/scss-files in `\src`
-
-#### Package
-- Check syntax of `.js` and `.scss` files in `\src`
-- Update all bower components
-- Concat all `.js` and `.css` files in bower components into `\demo\bower_components.js` and `\demo\bower_components.css`
-- Copy all images and font files used by bower components to `\demo\images` and `\demo\fonts`
-
-
-### `grunt prod`
-Building a production version in `\dist`
-In [Gruntfile_setup.json](#gruntfile_setup_json) the `isApplication` entity determine if it is an *`Application`* or a *`Package`*
-#### Application
-- Check syntax of `.js` and `.scss` files in `\src`
-- Update all bower components   
-- Concat and minify all `.js` files in bower components **AND** in `\src` into one file `\dist\[[APPLICATIONNAME]_[TIMESTAMP].js` and `\dist\[[APPLICATIONNAME]_[TIMESTAMP].min.js`      
-- Compile all `.scss` files in `\src` and concat and minify them with all the `.css` files in bower components **AND** in `\src` into one file `\dist\[[APPLICATIONNAME]_[TIMESTAMP].css` and `\dist\[[APPLICATIONNAME]_[TIMESTAMP].min.css`
-- Create `\dist\index.html` from `\src\index_TEMPLATE.html`, `\src\meta.html`, and `\src\body.html` 
-- Copy all images and font files used by bower components to `\dist\images` and `\dist\fonts`   
-- Copy all images and font files in `\src` to `\dist\images` and `\dist\fonts`
-
-##### output example (application='*fcoo-app*')
-	dist/
-	  images/
-	  fonts/
-	  index.html
-	  fcoo-app_2015-12-24-13_22_50.js
-	  fcoo-app_2015-12-24-13_22_50.min.js
-	  fcoo-app_2015-12-24-13_22_50.css
-	  fcoo-app_2015-12-24-13_22_50.min.css
-
-
- 
-#### Package
-- Check syntax of `.js` and `.scss` files in `\src`
-- Concat and minify all `.js`files in `\src` into one file `\dist\[PACKAGENAME].js` and `\dist\[PACKAGENAME].min.js`
-- Compile, concat and minify all `.scss` files in `\src` into one file `\dist\PACKAGENAME.css` and `\dist\PACKAGENAME.min.css`
-- Copy all images and font files in `\src` to `\dist\images` and `\dist\fonts`
-
-##### Output example (packages='*fcoo-plugin*')
-	dist/
-	  images/
-	  fonts/
-	  fcoo-plugin.js
-	  fcoo-plugin.min.js
-	  fcoo-plugin.css
-	  fcoo-plugin.min.css
-
-### `grunt github`
-Create a complete new release and push it to [GitHub][]
-- Run `grunt prod` *(optional)*
-- Prompt for new and update `version` in `bower.json` and `package.json`
-- Update `\dist\index.html` with new version (only *Application*)
-- Commit all files in [Git][]
-- Create a new `TAG` with message "*v1.2.3*"
-- Merge branch `'master'` into branch `'gh-pages'` *(optional)*
-- Push all branches and tags to [GitHub][]
-
-### Credential Helper
- On `Windows` you can use a [credential helper](http://windows.microsoft.com/en-us/windows7/manage-stored-passwords-certificates-and-other-credentials) to tell [Git][] to remember your GitHub username and password every time it talks to GitHub. Just run
-
-    git config --global credential.helper wincred
-
-To stop it run
-
-	git config --global --unset credential.helper 
