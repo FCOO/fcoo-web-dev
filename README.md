@@ -33,7 +33,7 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - Using [Sass][] to create and compile css-files. The following sass-packages are installed automatic: [bourbon](http://bourbon.io), [modernizr-mixin](https://github.com/danielguillan/modernizr-mixin), [mathsass](https://github.com/terkel/mathsass)
 - Using [JSHint][] to validate and check JavaScript code
 - Using	[grunt-init][grunt-init] and the [FCOO templates](#fcoo_template) to create new packages/application
-- Using common [directory structure](#directory_structure) and [file formats](#file_formats): `\src, \demo, \dist, \bower_components `
+- Using common [directory structure](#directory_structure) and [file formats](#file_formats): `\src, \demo, \dev, \dist, \bower_components `
 - Using [grunt-tasks][gruntfile] defined in [github.com/FCOO/gruntfile.js][fcoo-gruntfile] to validate, check and build the package/application
 - Using [Semantic Versioning][semver]: `1.2.3` / `major.minor.patch`
 - Using git `tags` when pushing new versions to [GitHub][]
@@ -164,6 +164,7 @@ The directory of the repository will contain the following subdirectories
 	\src
 	\dest
 	\demo
+	\dev
 	\bower_components
 	\node_modules
 
@@ -216,8 +217,8 @@ The main task are:
 
 <a name="gruntfile_setup_json"></a>
 ### `gruntfile_setup.json`
-Used by [`Gruntfile.js`](gruntfile) to define the type of application etc.
-Descriptions are in [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js)
+Used by `gruntfile.js` to define the type of application etc.
+Descriptions are in [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js#gruntfile_setupjson)
 
 
 ### `package.json` 
