@@ -7,14 +7,13 @@
 [bower]: https://bower.io
 [sass]: https://sass-lang.com
 [jshint]: http://jshint.com/
-[gruntfile]: (#gruntfile)
+[gruntfile]: #gruntfile
 [semver]: http://semver.org/
-[fcoo-gruntfile]: https://github.com/fcoo/gruntfile.js
-[fcoo-gruntfile-check]: https://github.com/fcoo/gruntfile.js#grunt-check
-[fcoo-gruntfile-dev]: https://github.com/fcoo/gruntfile.js#grunt-dev
-[fcoo-gruntfile-prod]: https://github.com/fcoo/gruntfile.js#grunt-prod
-[fcoo-gruntfile-github]: https://github.com/fcoo/gruntfile.js#grunt-github
-[fcoo-gruntfile-setup]: https://github.com/FCOO/gruntfile.js#gruntfile_setupjson
+
+[fcoo-gruntfile.js]: https://github.com/fcoo/fcoo-gruntfile.js
+[fcoo-grunt-plugin]: https://github.com/FCOO/fcoo-grunt-plugin
+[branch model]: http://nvie.com/posts/a-successful-git-branching-model
+[git-flow]: https://github.com/nvie/gitflow
 
 This document a suggestion for a common FCOO standard format, structure, templates, npm scripts, and Grunt scripts to create, develop and distribute packages, plugins, and applications from FCOO
 
@@ -28,13 +27,15 @@ This document a suggestion for a common FCOO standard format, structure, templat
 # Overview
 
 - Using [Git][], [GitHub][], and account [github/fcoo](http://github.com/fcoo)
+- Using [Vincent Driessen's branching model](http://nvie.com/posts/a-successful-git-branching-model/) for **applications**
+- Using [git-flow][] git extensions to manages the [branch model][] 
 - Using [Grunt.js][grunt] as Task Runner
 - Using [Bower][bower] as front-end package management
 - Using [Sass][] to create and compile css-files. The following sass-packages are installed automatic: [bourbon](http://bourbon.io), [modernizr-mixin](https://github.com/danielguillan/modernizr-mixin), [mathsass](https://github.com/terkel/mathsass)
 - Using [JSHint][] to validate and check JavaScript code
 - Using	[grunt-init][grunt-init] and the [FCOO templates](#fcoo_template) to create new packages/application
 - Using common [directory structure](#directory_structure) and [file formats](#file_formats): `\src, \demo, \dev, \dist, \bower_components `
-- Using [grunt-tasks][gruntfile] defined in [github.com/FCOO/gruntfile.js][fcoo-gruntfile] to validate, check and build the package/application
+- Using [grunt-tasks][gruntfile] defined in [fcoo-grunt-plugin][] and options defined in [gruntfile.js][fcoo-gruntfile.js] to validate, check and build the package/application
 - Using [Semantic Versioning][semver]: `1.2.3` / `major.minor.patch`
 - Using git `tags` when pushing new versions to [GitHub][]
 
@@ -75,17 +76,15 @@ This document a suggestion for a common FCOO standard format, structure, templat
 3. Clone the new repository to your computer/Desktop
 4. Create the repository using [grunt-init] and one of the [FCOO templates](#fcoo_template)
 
-
+<
 ## `gruntfile.js`
-The `gruntfile.js` installed with the [FCOO Templates](#fcoo_template) is used to check, build, and push new versions to GitHub.
-It has its own repository and description in [github.com/FCOO/gruntfile.js][fcoo-gruntfile].
-
-It  is used to has the following main tasks witch details are descriped in [fcoo-gruntfile]
+The `gruntfile.js` installed with the [FCOO Templates](#fcoo_template) includes the plugin [fcoo-grunt-plugin][] to check, build, and push new versions to GitHub.
+The plugin has its own repository and description in [github.com/FCOO/fcoo-grunt-plugin][fcoo-grunt-plugin].
 The main tasks are
-- **[`grunt check`][fcoo-gruntfile-check]** Check the syntax of all `.scss` and `.js` files in `\src`
-- **[`grunt dev`][fcoo-gruntfile-dev]** Building a development version in `\demo` or `\dev`
-- **[`grunt prod`][fcoo-gruntfile-prod]** Building a production version in `\dist` 
-- **[`grunt github`][fcoo-gruntfile-github]** Create a complete new release and push it to [GitHub][]
+- **`grunt check`** Check the syntax of all `.scss` and `.js` files in `\src`
+- **`grunt dev`** Building a development version in `\demo` or `\dev`
+- **`grunt build`** Building a production version in `\dist` 
+- **`grunt push** Create a complete new release and push it to [GitHub][]
 
 ----  
 <a name="full_version"></a>
@@ -155,7 +154,7 @@ There are a lot of [options for JSHint](http://jshint.com/docs/options/) and the
 ## FCOO Templates
 Using [grunt-init] to install one of the FCOO Templates ([`fcoo-application`](https://github.com/FCOO/grunt-init-fcoo-application), [`fcoo-leaflet`](https://github.com/FCOO/grunt-init-fcoo-leaflet), or [`fcoo-jquery`](https://github.com/FCOO/grunt-init-fcoo-jquery))
 
-**These templates will also install `Gruntfile.js` and `package.json` from [github.com/FCOO/gruntfile.js][fcoo-gruntfile]** 
+**These templates will also install `Gruntfile.js` and `package.json` from [github.com/FCOO/fcoo-gruntfile.js][fcoo-gruntfile.js] and [fcoo-grunt-plugin][]** 
 
 <a name="directory_structure"></a>
 ## Directory structure
@@ -181,7 +180,7 @@ The directory of the repository will contain the following subdirectories
 	- `src\_body.html` *must* contain the contents of the `<body>` for the application
 	- `src\_head.html` can contains additional `<meta>`- and `<links>`-tags
 - [README.md](#readme.md) should be filled out   
-- The file [`\Gruntfile_setup.json`][fcoo-gruntfile-setup] defines the type of application etc.
+- The options in [`\Gruntfile.json`][fcoo-gruntfile.js] defines the type of application etc.
 - The file [`\bower.json`](#bower_json) is used by [`Gruntfile.js`][gruntfile] and [bower] to retrieve and build the included bower components.
 
 
@@ -206,19 +205,14 @@ Troubleshooting
 Changelog
 
 <a name="gruntfile"></a>
-### `gruntfile.js`
-The `gruntfile.js` contains the code for all the different Grunt-task used to check and build the package/application. 
-`gruntfile.js` and `package.json` are in [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js) and are automatic included in the  [FCOO templates](#fcoo_template)
-The main task are:
-- **[`grunt check`][fcoo-gruntfile-check]** Check the syntax of all `.scss` and `.js` files in `\src`
-- **[`grunt dev`][fcoo-gruntfile-dev]** Building a development version in `\demo` or `\dev`
-- **[`grunt prod`][fcoo-gruntfile-prod]** Building a production version in `\dist` 
-- **[`grunt github`][fcoo-gruntfile-github]** Create a complete new release and push it to [GitHub][]
-
-<a name="gruntfile_setup_json"></a>
-### `gruntfile_setup.json`
-Used by `gruntfile.js` to define the type of application etc.
-Descriptions are in [github/fcoo/gruntfile.js](https://github.com/FCOO/gruntfile.js#gruntfile_setupjson)
+## `gruntfile.js`
+The `gruntfile.js` installed with the [FCOO Templates](#fcoo_template) includes the plugin [fcoo-grunt-plugin][] to check, build, and push new versions to GitHub.
+The plugin has its own repository and description in [github.com/FCOO/fcoo-grunt-plugin][fcoo-grunt-plugin].
+The main tasks are
+- **`grunt check`** Check the syntax of all `.scss` and `.js` files in `\src`
+- **`grunt dev`** Building a development version in `\demo` or `\dev`
+- **`grunt build`** Building a production version in `\dist` 
+- **`grunt push** Create a complete new release and push it to [GitHub][]
 
 
 ### `package.json` 
