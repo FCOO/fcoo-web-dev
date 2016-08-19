@@ -161,27 +161,33 @@ Using [grunt-init] to install one of the FCOO Templates ([`fcoo-application`](ht
 
 <a name="directory_structure"></a>
 ## Directory structure
-The directory of the repository will contain the following subdirectories 
+The project / directory structure is based on [Yeomans standard web project structure](http://www.sohamkamani.com/blog/2015/08/21/frontend/) and have the following structure
+ 
+    APPLICATION_NAME
+	├── app
+    |   ├── index.html.tmpl                 //Template for buiding the application in \dist
+    |   ├── index-dev.html.tmpl             //Tempalte for buiding the application in \dev
+    |   ├── scripts                         //js files
+    |   ├── styles                          //css and scss fiels
+    |   |   ├── fonts                           //Font-files
+    |   |   └── images                          //Images for css (background-images: "images/example.png")
+    |   └── images                          //Images for the application
+    ├── dest                            //The compiled and build distribution files 
+    ├── demo                            //Demo page for packages. Also the page for the "gh-pages" branch in GitHub
+    ├── dev                             //Development version of the application
+    ├── bower_components                //Installed Bower components
+    └── node_modules                    //Installed Node.js moduels
 
-	\src
-	\dest
-	\demo
-	\dev
-	\bower_components
-	\node_modules
 
-
-- All source-files must be placed in `\src` or `\src\**`
 - All files or directories starting with `"_"`(underscore) are ignored
-- All images must be placed in subdirectories under `\src` or `\src\**` named `images` (eq. `src\images` or `src\my-directory\images`)
-- All fonts files must be placed in subdirectories under `\src`or `\src\**` named `fonts` (eq. `src\fonts` or `src\my-directory\fonts`)
+- For applications: All files and directories in `\app` (except `scripts` and `styles`) are included in the build version in `\dest` and `\dev`
+- All `*.js` source-files must be placed in `\app\scripts`
+- All `*.css` and `*.scss` source-files must be placed in `\app\styles`
+- All images used directly by the application (eq. `<img src="images/the_image.gif"/>`) must be placed in `\app\images`
+- All images used by css (eq. `background-images: "images/example.png"`) must be placed in `\app\styles\images`
+- All fonts files must be placed in `\app\styles\fonts`
 - The references to an image or font file must be relative to the subdirectory: `<img src="images/the_image.gif"/>` or `@font-face {font-family: 'icomoon'; src:url('fonts/icomoon.eot'); .. }`
-- All files in `\src\_dist_files` will be copyed to `\dist` and `\demo` or `\dev`
 - All files in `\dest` is auto-generated. No files should be placed in `\dest` manually
-- **For applications only**:
-	- `src\_index_TEMPLATE.html` is the template for buiding the applications in `\dist`
-	- `src\_body.html` *must* contain the contents of the `<body>` for the application
-	- `src\_head.html` can contains additional `<meta>`- and `<links>`-tags
 - [README.md](#readme.md) should be filled out   
 - The options in [`\Gruntfile.json`][fcoo-gruntfile.js] defines the type of application etc.
 - The file [`\bower.json`](#bower_json) is used by [`Gruntfile.js`][gruntfile] and [bower] to retrieve and build the included bower components.
