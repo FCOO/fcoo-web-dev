@@ -7,6 +7,7 @@
 [bower]: https://bower.io
 [sass]: https://sass-lang.com
 [jshint]: http://jshint.com/
+[eslint]: http://eslint.org/
 [gruntfile]: #gruntfile
 [semver]: http://semver.org/
 
@@ -32,7 +33,7 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - Using [Grunt.js][grunt] as Task Runner
 - Using [Bower][bower] as front-end package management
 - Using [Sass][] to create and compile css-files. The following sass-packages are installed automatic: [bourbon](http://bourbon.io), [modernizr-mixin](https://github.com/danielguillan/modernizr-mixin), [mathsass](https://github.com/terkel/mathsass)
-- Using [JSHint][] to validate and check JavaScript code
+- Using [ESLint][] to validate and check JavaScript code
 - Using	[grunt-init][grunt-init] and the [FCOO templates](#fcoo_template) to create new packages/application
 - Using common [directory structure](#directory_structure) and [file formats](#file_formats): `\src, \demo, \dev, \dist, \bower_components `
 - Using [grunt-tasks][gruntfile] defined in [fcoo-grunt-plugin][] and options defined in [gruntfile.js][fcoo-gruntfile.js] to validate, check and build the package/application
@@ -51,7 +52,7 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - *Optional*: Install [TortoiseGit]( https://tortoisegit.org) Windows Shell Interface to Git
 - *Optional*: Install a [GitHub GUI](http://git-scm.com/downloads/guis) eq. [GitHub for Windows](https://windows.github.com/)
 
-**Node.js, Grunt, Sass, JSHint etc.**
+**Node.js, Grunt, Sass, ESLint etc.**
 
 - Install Node.js from [https://nodejs.org]()
 - `npm install -g npm`
@@ -60,7 +61,7 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - `npm install -g bower`
 - Install [Ruby](https://www.ruby-lang.org/) from [https://www.ruby-lang.org/en/downloads/]()
 - `gem install sass` (or see http://sass-lang.com/install)
-- *Optional*: `npm install -g jshint`
+- *Optional*: Install ESLint as command line `npm install -g eslint`
 - *Optional*: Create a json-file with [default prompt answers](#default_prompt) for new applications/packages
 
 **FCOO templates for [grunt-init][grunt-init]** 
@@ -99,7 +100,7 @@ We use [Node.js](https://nodejs.org) as the JavaScript engine and [npm (Node Pac
 - Install **Node.js** from (https://nodejs.org)
 - **npm** is installed together with Node.js, but you update to the latest version with `npm install -g npm``
 
-### Bower, Grunt, Sass, and JSHint
+### Bower, Grunt, Sass, and ESLint
 
 - As Task Runner we use **[Grunt](http://gruntjs.com/)**
 - As a front-end package management we use **[Bower](https:/bower.io)**
@@ -140,13 +141,15 @@ To install Sass you need [Ruby](https://www.ruby-lang.org/)
 - `gem install sass` 
 
 See also https://sass-lang.com/install 
-<a name="jshint"></a>
-#### JSHint
-[JSHint][] is used inside [grunt-tasks][gruntfile] to validate and check JavaScript code.
-If you install it as stand-alone with `npm install -g jshint` you can check individual js-files from the repository root with 
-`jshint src\FILENAME.js`
+<a name="eslint"></a>
+#### ESLint
+[ESLint][] is used inside [grunt-tasks][gruntfile] to validate and check JavaScript code.
+If you install it as stand-alone with `npm install -g eslint` you can check individual js-files from the repository root with 
+`eslint src\FILENAME.js`
 
-There are a lot of [options for JSHint](http://jshint.com/docs/options/) and the file `.jshintrc` contains the options used in [grunt-tasks][gruntfile] and when `jshint` is called from the root
+There are a lot of [options for ESLint](http://eslint.org/docs/user-guide/configuring) 
+
+and the file `.eslintrc` contains the options used in [grunt-tasks][gruntfile] and when `eslint` is called from the root
 
 
 
