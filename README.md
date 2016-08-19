@@ -172,7 +172,7 @@ The project / directory structure is based on [Yeomans standard web project stru
     |   |   ├── fonts                           //Font-files
     |   |   └── images                          //Images for css (background-images: "images/example.png")
     |   └── images                          //Images for the application
-    ├── dest                            //The compiled and build distribution files 
+    ├── dist                            //The compiled and build distribution files 
     ├── demo                            //Demo page for packages. Also the page for the "gh-pages" branch in GitHub
     ├── dev                             //Development version of the application
     ├── bower_components                //Installed Bower components
@@ -181,14 +181,14 @@ The project / directory structure is based on [Yeomans standard web project stru
 
 
 - All files or directories starting with `"_"`(underscore) are ignored
-- For applications: All files and directories in `\app` (except `scripts` and `styles`) are included in the build version in `\dest` and `\dev`
+- For applications: All files and directories in `\app` (except `scripts` and `styles`) are included in the build version in `\dist` and `\dev`
 - All `*.js` source-files must be placed in `\app\scripts`
 - All `*.css` and `*.scss` source-files must be placed in `\app\styles`
 - All images used directly by the application (eq. `<img src="images/the_image.gif"/>`) must be placed in `\app\images`
 - All images used by css (eq. `background-images: "images/example.png"`) must be placed in `\app\styles\images`
 - All fonts files must be placed in `\app\styles\fonts`
 - The references to an image or font file must be relative to the subdirectory: `<img src="images/the_image.gif"/>` or `@font-face {font-family: 'icomoon'; src:url('fonts/icomoon.eot'); .. }`
-- All files in `\dest` is auto-generated. No files should be placed in `\dest` manually
+- All files in `\dist` is auto-generated. No files should be placed in `\dist` manually
 - [README.md](#readme.md) should be filled out   
 - The options in [`\Gruntfile.json`][fcoo-gruntfile.js] defines the type of application etc.
 - The file [`\bower.json`](#bower_json) is used by [`Gruntfile.js`][gruntfile] and [bower] to retrieve and build the included bower components.
