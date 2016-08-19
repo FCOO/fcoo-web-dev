@@ -176,7 +176,8 @@ The project / directory structure is based on [Yeomans standard web project stru
     ├── demo                            //Demo page for packages. Also the page for the "gh-pages" branch in GitHub
     ├── dev                             //Development version of the application
     ├── bower_components                //Installed Bower components
-    └── node_modules                    //Installed Node.js moduels
+    ├── node_modules                    //Installed Node.js moduels
+    └── log                             //log-files from different tasks
 
 
 - All files or directories starting with `"_"`(underscore) are ignored
