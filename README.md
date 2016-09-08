@@ -8,6 +8,7 @@
 [sass]: https://sass-lang.com
 [jshint]: http://jshint.com/
 [eslint]: http://eslint.org/
+[uglify]: https://github.com/gruntjs/grunt-contrib-uglify
 [gruntfile]: #gruntfile
 [semver]: http://semver.org/
 
@@ -34,6 +35,7 @@ This document a suggestion for a common FCOO standard format, structure, templat
 - Using [Bower][bower] as front-end package management
 - Using [Sass][] to create and compile css-files. The following sass-packages are installed automatic: [bourbon](http://bourbon.io), [modernizr-mixin](https://github.com/danielguillan/modernizr-mixin), [mathsass](https://github.com/terkel/mathsass)
 - Using [ESLint][] to validate and check JavaScript code
+- Using [UglifyJS][uglify] to minify JavaScript files
 - Using	[grunt-init][grunt-init] and the [FCOO templates](#fcoo_template) to create new packages/application
 - Using common [directory structure](#directory_structure) and [file formats](#file_formats): `\src, \demo, \dev, \dist, \bower_components `
 - Using [grunt-tasks][gruntfile] defined in [fcoo-grunt-plugin][] and options defined in [gruntfile.js][fcoo-gruntfile.js] to validate, check and build the package/application
@@ -77,15 +79,16 @@ This document a suggestion for a common FCOO standard format, structure, templat
 3. Clone the new repository to your computer/Desktop
 4. Create the repository using [grunt-init] and one of the [FCOO templates](#fcoo_template)
 
-<
+
 ## `gruntfile.js`
 The `gruntfile.js` installed with the [FCOO Templates](#fcoo_template) includes the plugin [fcoo-grunt-plugin][] to check, build, and push new versions to GitHub.
 The plugin has its own repository and description in [github.com/FCOO/fcoo-grunt-plugin][fcoo-grunt-plugin].
 The main tasks are
+
 - **`grunt check`** Check the syntax of all `.scss` and `.js` files in `\src`
 - **`grunt dev`** Building a development version in `\demo` or `\dev`
 - **`grunt build`** Building a production version in `\dist` 
-- **`grunt push** Create a complete new release and push it to [GitHub][]
+- **`grunt push`** Create a complete new release and push it to [GitHub][]
 
 ----  
 <a name="full_version"></a>
@@ -165,19 +168,19 @@ The project / directory structure is based on [Yeomans standard web project stru
  
     APPLICATION_NAME
 	├── app
-    |   ├── index.html.tmpl                 //Template for buiding the application in \dist
-    |   ├── index-dev.html.tmpl             //Tempalte for buiding the application in \dev
+    |   ├── _index.html.tmpl                //Template for buiding the application in \dist
+    |   ├── _index-dev.html.tmpl            //Tempalte for buiding the application in \dev
     |   ├── scripts                         //js files
     |   ├── styles                          //css and scss fiels
     |   |   ├── fonts                           //Font-files
     |   |   └── images                          //Images for css (background-images: "images/example.png")
     |   └── images                          //Images for the application
     ├── dist                            //The compiled and build distribution files 
+    |   └── log                             //log-files from building the application in /dist
     ├── demo                            //Demo page for packages. Also the page for the "gh-pages" branch in GitHub
     ├── dev                             //Development version of the application
     ├── bower_components                //Installed Bower components
-    ├── node_modules                    //Installed Node.js moduels
-    └── log                             //log-files from different tasks
+    └── node_modules                    //Installed Node.js moduels
 
 
 - All files or directories starting with `"_"`(underscore) are ignored
