@@ -3,6 +3,8 @@
 [grunt-init]: http://gruntjs.com/project-scaffolding
 [git]: https://git-scm.com
 [github]: https://github.com
+[yarn]: https://yarnpkg.com/lang/en/
+[npm]: https://www.npmjs.com/
 [grunt]: https://gruntjs.com
 [bower]: https://bower.io
 [sass]: https://sass-lang.com
@@ -30,7 +32,9 @@ This document a suggestion for a common FCOO standard format, structure, templat
 
 - Using [Git][], [GitHub][], and account [github/fcoo](http://github.com/fcoo)
 - Using [Vincent Driessen's branching model](http://nvie.com/posts/a-successful-git-branching-model/) for **applications**
-- Using [git-flow][] git extensions to manages the [branch model][] 
+- Using [git-flow][] git extensions to manages the [branch model][]
+- Using [npm][] as (global) package manager 
+- Usiny [yarn][] as package manager
 - Using [Grunt.js][grunt] as Task Runner
 - Using [Bower][bower] as front-end package management
 - Using [Sass][] to create and compile css-files. The following sass-packages are installed automatic: [bourbon](http://bourbon.io), [modernizr-mixin](https://github.com/danielguillan/modernizr-mixin), [mathsass](https://github.com/terkel/mathsass)
@@ -56,13 +60,14 @@ This document a suggestion for a common FCOO standard format, structure, templat
 
 **Node.js, Grunt, Sass, ESLint etc.**
 
-- Install Node.js from [https://nodejs.org]()
+- Install Node.js from [https://nodejs.org]() **Must be version 10.16**
 - `npm install -g npm`
+- Install [Yarn][yarn] from https://yarnpkg.com/en/docs/install
+- Set global options for yarn not to include optional packages: `yarn config set ignore-optional true -g`
 - `npm install -g grunt-cli`
 - `npm install -g grunt-init`
 - `npm install -g bower`
-- Install [Ruby](https://www.ruby-lang.org/) from [https://www.ruby-lang.org/en/downloads/]()
-- `gem install sass` (or see http://sass-lang.com/install)
+- `npm install -g sass` (see https://sass-lang.com/install)
 - *Optional*: Install ESLint as command line `npm install -g eslint`
 - *Optional*: Create a json-file with [default prompt answers](#default_prompt) for new applications/packages
 
@@ -97,11 +102,14 @@ The main tasks are
 ## Tools and Packages
 
 ### Node.js and npm
-We use [Node.js](https://nodejs.org) as the JavaScript engine and [npm (Node Package Manager)](https://www.npmjs.com/) to (un)install and run the different packages
+We use [Node.js](https://nodejs.org) as the JavaScript engine and [npm (Node Package Manager)](https://www.npmjs.com/) and [yarn][] to (un)install and run the different global and local packages
 
 #### Installation
 - Install **Node.js** from (https://nodejs.org)
-- **npm** is installed together with Node.js, but you update to the latest version with `npm install -g npm``
+- **npm** is installed together with Node.js, but you update to the latest version with `npm install npm@latest -g`
+- Install [Yarn][yarn] from https://yarnpkg.com/en/docs/install#windows-stable
+- Set global options for yarn not to include optional packages: `yarn config set ignore-optional true -g`
+
 
 ### Bower, Grunt, Sass, and ESLint
 
@@ -138,10 +146,7 @@ Example:
     npm install -g bower
 
 #### Install Sass
-To install Sass you need [Ruby](https://www.ruby-lang.org/) 
-
-- Install Ruby from https://www.ruby-lang.org/en/downloads/
-- `gem install sass` 
+- `npm install -g sass` 
 
 See also https://sass-lang.com/install 
 <a name="eslint"></a>
