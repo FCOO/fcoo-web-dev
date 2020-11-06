@@ -60,7 +60,7 @@ This document a suggestion for a common FCOO standard format, structure, templat
 
 **Node.js, Grunt, Sass, ESLint etc.**
 
-- Install Node.js from [https://nodejs.org]() **Must be version 10.16**
+- Install Node.js from [https://nodejs.org](https://nodejs.org)
 - `npm install -g npm`
 - Install [Yarn][yarn] from https://yarnpkg.com/en/docs/install
 - Set global options for yarn not to include optional packages: `yarn config set ignore-optional true -g`
