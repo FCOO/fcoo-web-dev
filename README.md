@@ -1,5 +1,7 @@
 # FCOO Web Development
 
+This repo has been moved to [gitLab/FCOO](https://gitlab.com/FCOO/web-applications/fcoo-web-development)
+
 [grunt-init]: http://gruntjs.com/project-scaffolding
 [git]: https://git-scm.com
 [github]: https://github.com
